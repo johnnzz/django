@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from myblog.views import list_view, detail_view, UserViewSet, GroupViewSet
+from myblog.views import list_view, detail_view, post_new, go_list_view, UserViewSet, GroupViewSet
 from django.contrib import admin
 from . import views
 from rest_framework import routers
@@ -26,10 +26,12 @@ router.register(r'groups', GroupViewSet)
 
 
 urlpatterns = [
-    url(r'^posts/(?P<post_id>\d+)/$', detail_view, name="blog_detail"),  # Add this line
-    url(r'^$', list_view, name="blog_index"),
+    url(r'^$', go_list_view, name="go_list_view"),
+    url(r'^myblog/$', go_list_view, name="go_list_view"),
+    url(r'^post/$', list_view, name="blog_index"),
+    url(r'^post/(?P<post_id>\d+)/$', detail_view, name="blog_detail"),
+    url(r'^post/create/$', post_new, name="post_new"),
     url(r'^admin/', admin.site.urls),
-    url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^post/new/$', views.post_new, name="post_new")
+    url(r'^', include(router.urls)),
     ]

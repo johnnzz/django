@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import RequestContext, loader
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from myblog.models import Post, Category
@@ -7,31 +7,39 @@ from rest_framework import viewsets
 from myblog.serializers import UserSerializer, GroupSerializer
 from .forms import MyForm
 from django.utils import timezone
-from django import forms
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the myblog index.")
+def go_list_view(request):
+    """
+    redirect user to the list view by default
+    """
+    return redirect("/myblog/post/")
 
 
 def post_new(request):
+    """
+    create a new post
+    """
     if request.method == "POST":
         form = MyForm(request.POST)
-        return render(request, 'post.html', {'form': form})
         if form.is_valid():
-            model_instance = form.save(commit=False)
-            model_instance.timestamp = timezone.now()
-            model_instance.save()
-            return redirect('/')
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect(detail_view, post_id=post.id)
     else:
         form = MyForm()
-        return render(request, "post.html", {'form': form})
+    return render(request, 'post.html', {'form': form})
 
 
 def list_view(request):
+    """
+    list all the posts
+    """
     print("Xrequest",request)
-    published = Post.objects.exclude(published_date__exact=None)
-    #published = Post.objects
+    #published = Post.objects.exclude(published_date__exact=None)
+    published = Post.objects
     print("XPUB",published)
     posts = published.order_by('-published_date')
     print("XPOSTS",posts)
@@ -41,7 +49,11 @@ def list_view(request):
     body = template.render(context)
     return HttpResponse(body, content_type="text/html") 
 
+
 def detail_view(request, post_id):
+    """
+    list a specific post
+    """
     #published = Post.objects.exclude(published_date__exact=None)
     published = Post.objects
 

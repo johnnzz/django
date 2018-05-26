@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a class="backlink" href="/">Home</a>
+    <a class="backlink" href="/myblog/">Home</a>
     <h1>{{ post }}</h1>
-        <p class="byline">
-        Posted by {{ post.author }} &mdash; {{ post.published_date }}
-        </p>
     <div class="post-body">
         {{ post.text }}
     </div>
