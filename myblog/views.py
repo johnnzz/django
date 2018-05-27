@@ -5,7 +5,7 @@ from myblog.models import Post, Category
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from myblog.serializers import UserSerializer, GroupSerializer, PostSerializer
-from .forms import MyForm
+from myblog.forms import MyForm
 from django.utils import timezone
 """
 views for myblog
