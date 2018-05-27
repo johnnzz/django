@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from myblog.models import Post, Category
 import datetime
 from django.utils.timezone import utc
+"""
+unit tests for myblog
+
+run via:
+~/uwpython/django% python3 manage.py test myblog
+"""
 
 
 class PostTestCase(TestCase):
