@@ -2,6 +2,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from myblog.models import Post, Category
 """
+serializer for myblog
+
 Example API use
 ---------------
 bash% # set username/password for the server

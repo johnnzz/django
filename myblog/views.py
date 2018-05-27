@@ -7,6 +7,9 @@ from rest_framework import viewsets
 from myblog.serializers import UserSerializer, GroupSerializer, PostSerializer
 from .forms import MyForm
 from django.utils import timezone
+"""
+views for myblog
+"""
 
 
 def go_list_view(request):
@@ -37,9 +40,9 @@ def list_view(request):
     """
     list all the posts
     """
-    #published = Post.objects.exclude(published_date__exact=None)
-    published = Post.objects
+    published = Post.objects.exclude(published_date__exact=None)
     posts = published.order_by('-published_date')
+    #published = Post.objects
     template = loader.get_template('list.html')
     context = {'posts': posts}
     body = template.render(context)
@@ -50,7 +53,6 @@ def detail_view(request, post_id):
     """
     list a specific post
     """
-    #published = Post.objects.exclude(published_date__exact=None)
     published = Post.objects
 
     try:

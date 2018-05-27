@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from myblog.models import Post
+from myblog.models import Post, Category
 import datetime
 from django.utils.timezone import utc
 
@@ -26,7 +26,7 @@ class CategoryTestCase(TestCase):
         self.assertEqual(expected, actual)
 
 class FrontEndTestCase(TestCase):
-    fixtures = ['myblog/myblog_test_fixture.json',]
+    fixtures = ['myblog_test_fixture.json',]
 
     def setUp(self):
         self.now = datetime.datetime.utcnow().replace(tzinfo=utc)
@@ -44,7 +44,7 @@ class FrontEndTestCase(TestCase):
             post.save()
 
     def test_list_only_published(self):
-        resp = self.client.get('/')
+        resp = self.client.get('/myblog/post/')
 
         for count in range(1, 11):
             title = "Test Post %d Title" % count

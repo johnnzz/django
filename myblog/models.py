@@ -1,7 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+"""
+models for myblog
+"""
 
 
+# model for Post
 class Post(models.Model):
     title = models.CharField(max_length=128)
     text = models.TextField(blank=True)
@@ -14,6 +18,7 @@ class Post(models.Model):
         return self.title
 
 
+# model for Category
 class Category(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)

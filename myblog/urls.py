@@ -1,3 +1,8 @@
+from django.conf.urls import url, include
+from myblog.views import list_view, detail_view, post_new, go_list_view, UserViewSet, GroupViewSet, PostViewSet
+from django.contrib import admin
+from . import views
+from rest_framework import routers
 """
 myblog URL configuration
 
@@ -9,13 +14,9 @@ Examples:
     enter a new post:
         http://192.168.1.209:8000/myblog/post/create/
 """
-from django.conf.urls import url, include
-from myblog.views import list_view, detail_view, post_new, go_list_view, UserViewSet, GroupViewSet, PostViewSet
-from django.contrib import admin
-from . import views
-from rest_framework import routers
 
 
+# serializer
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
