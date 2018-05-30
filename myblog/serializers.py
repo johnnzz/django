@@ -10,11 +10,11 @@ bash% # set username/password for the server
 bash% USER=<user>
 bash% PASSWORD=<password>
 bash% # list all posts
-bash% curl -H 'Accept: application/json; indent=4' -u ${USER}:${PASSWORD} http://127.0.0.1:800/myblog/post-api/
+bash% curl -H 'Accept: application/json; indent=4' -u ${USER}:${PASSWORD} http://127.0.0.1:8000/myblog/post-api/
 bash% # create a post
 bash% curl POST http://127.0.0.1:8000/myblog/post-api/ -u ${USER}:${PASSWORD} -H "Content-Type:application/json" -d '{"title": "curld title", "text": "curld text", "author": "http://127.0.0.1:8000/myblog/users/1/", "published_date": "2018-05-26T22:22:22.766866Z"}'
 bash% # list a specific post
-bash% curl -H 'Accept: application/json; indent=4' -u ${USER}:${PASSWORD} http://127.000/myblog/post-api/1/
+bash% curl -H 'Accept: application/json; indent=4' -u ${USER}:${PASSWORD} http://127.0.0.0/myblog/post-api/1/
 """
 
 
