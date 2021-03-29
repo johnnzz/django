@@ -50,7 +50,7 @@ psycopg2-binary==2.7.4
 ptyprocess==0.5.2
 py==1.4.34
 pyaes==1.6.1
-Pygments==2.2.0
+Pygments==2.7.4
 pyserial==3.4
 pytest==3.2.3
 python-dateutil==2.7.2
